@@ -55,9 +55,6 @@ function genConfig (opts) {
 
   if (opts.env) {
     config.plugins = config.plugins.concat([
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: false
-      }),
       new OptimizeCssAssetsPlugin({
         assetNameRegExp: /\.css$/g,
         cssProcessor: require('cssnano'),
@@ -78,9 +75,12 @@ function genConfig (opts) {
       }),
       new OptimizeJsPlugin({
         sourceMap: false
-      }),
-      new webpack.optimize.ModuleConcatenationPlugin()
+      })
     ])
+
+    config.optimization = {
+      minimize: true
+    }
   }
 
   return config

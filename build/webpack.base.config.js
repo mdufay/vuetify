@@ -1,5 +1,5 @@
+const webpack = require('webpack')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
-
 const resolve = file => require('path').resolve(__dirname, file)
 
 module.exports = {
@@ -13,12 +13,14 @@ module.exports = {
       'stylus': resolve('../src/stylus')
     }
   },
+  mode: process.env.NODE_ENV,
   node: {
     fs: 'empty'
   },
   plugins: [
     new FriendlyErrorsWebpackPlugin({
       clearConsole: true
-    })
+    }),
+    new webpack.LoaderOptionsPlugin({ options: {} })
   ]
 }
